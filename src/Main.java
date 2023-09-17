@@ -3,32 +3,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int principal;
-        double annualRate;
-        byte years;
-
-        while (true) {
-            System.out.print("Principal: ");
-            principal = scanner.nextInt();
-            if (principal > 0) break;
-            System.out.println("Enter a valid amount.");
-        }
-
-        while (true) {
-            System.out.print("Annual Interest Rate: ");
-            annualRate = scanner.nextDouble();
-            if (annualRate > 0) break;
-            System.out.println("Enter a valid rate.");
-        }
-
-        while (true) {
-            System.out.print("Period (Years): ");
-            years = scanner.nextByte();
-            if (years > 1 && years < 40) break;
-            System.out.println("Enter a valid period.");
-        }
+        int principal = (int) readNumber("Principal: ", 1000, 1_000_000);
+        double annualRate = readNumber("Annual Rate: ", 1, 50);
+        byte years = (byte) readNumber("Period (Years) :", 1, 50);
 
         double mortgage = calculateMortgage(principal, annualRate, years);
 
@@ -46,5 +23,17 @@ public class Main {
         double mathPower = Math.pow(1 + monthlyRate, payments);
 
         return principal * (monthlyRate * mathPower / (mathPower - 1));
+    }
+
+    public static double readNumber(String prompt, double min, double max) {
+        Scanner scanner = new Scanner(System.in);
+        double value;
+        while (true) {
+            System.out.print(prompt);
+            value = scanner.nextDouble();
+            if (value >= min && value <= max) break;
+            System.out.println("Enter a value between " + min + " and " + max + ".");
+        }
+        return value;
     }
 }
