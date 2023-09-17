@@ -10,12 +10,19 @@ public class Main {
         double annualRate = readNumber("Annual Rate: ", 1, 50);
         byte years = (byte) readNumber("Period (Years): ", 1, 50);
 
+        generateMortgage(principal, annualRate, years);
+        generateSchedule(years, principal, annualRate);
+    }
+
+    private static void generateMortgage(int principal, double annualRate, byte years) {
         double mortgage = calculateMortgage(principal, annualRate, years);
         System.out.println("MORTGAGE");
         System.out.println("--------");
         String formattedMortgage = NumberFormat.getCurrencyInstance().format(mortgage);
         System.out.println("Monthly payment: " + formattedMortgage);
+    }
 
+    private static void generateSchedule(byte years, int principal, double annualRate) {
         System.out.println("PAYMENT SCHEDULE");
         System.out.println("--------");
         System.out.println("\nBalance at:");
