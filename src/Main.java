@@ -1,20 +1,13 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
-        int principal = (int) readNumber("Principal: ");
-        double annualRate = readNumber("Annual Rate: ");
-        byte years = (byte) readNumber("Period (Years): ");
+        int principal = (int) Console.readNumber("Principal: ", 1_000, 10_000_000);
+        double annualRate = Console.readNumber("Annual Rate: ", 1, 10);
+        byte years = (byte) Console.readNumber("Period (Years): ", 1, 35);
 
         var mortgage1 = new Mortgage(principal, annualRate, years);
 
         mortgage1.generateMortgage();
         mortgage1.generateSchedule();
-    }
-    public static double readNumber(String prompt) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(prompt);
-        return scanner.nextDouble();
     }
 }
